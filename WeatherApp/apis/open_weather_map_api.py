@@ -4,6 +4,7 @@ import logging
 import requests
 
 from WeatherApp.interface import open_weather_map_interface
+from django.conf import settings
 
 
 class OpenWeatherMapAPI:
@@ -12,7 +13,7 @@ class OpenWeatherMapAPI:
     Functions are developed as class methods.
     """
 
-    API_KEY = 'efa58fb098b2a9f881069b410ca23df3'
+    API_KEY = settings.OPEN_WEATHER_MAP_API_KEY
     HOST = 'https://api.openweathermap.org/data/2.5/'
     # These units are used in the templates section.
     UNITS = {
@@ -63,12 +64,17 @@ class OpenWeatherMapAPI:
 
     @classmethod
     def request_and_parse(cls, path) -> dict:
-        raw_response = requests.get(path)
+        try:
+            raw_response = requests.get(path)
+            response_text = raw_response.text
+        except Exception as e:
+            logging.error(f'Request error on path: {path}, response: {e}')
+            return {'error': True, 'error_text': 'Request error'}
 
         # Check status code if success
         if raw_response.status_code != 200:
-            logging.error(f'Request error on path: {path}')
-            return {'error': True, 'error_text': 'Request error'}
+            logging.error(f'Request error on path: {path}, response: {response_text}')
+            return {'error': True, 'error_text': f'Request code error.'}
 
         try:
             # Response string to dictionary

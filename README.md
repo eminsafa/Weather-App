@@ -1,16 +1,32 @@
 # Weather App 🌤
 Weather and Forecast Monitoring Web Application
 
+## Table of Contents
+
+<!--ts-->
+* [Used Technologies](#used-technologies)
+* [Prerequisites](#prerequisites)
+* [Running](#running)
+* [Admin Panel](#admin-panel)
+* [Features](#features)
+* [Views and Endpoints](#views--endpoints)
+* [Test](#tests)
+* [Logs](#logs)
+* [Repository](#repository)
+* [License](#license)
+<!--te-->
 
 ## Used Technologies
 
 ### Python / Django
 
-To handle views, Django preferred. But django-rest framework may better choice.
+Django was preferred because backend and view will be used together in this project.
+However, it may be more appropriate to use _django-rest-framework_ for further development of the project.
 
 ### SQLite
 
-For fast plug in plug out db with data.
+SQLite was used to make the project available quickly in different environments.
+Thus, there was no need to run a stand-alone database.
 <br><br><br>
 _This project is backend based, but Bootstrap and JS are used to make frontend improvements fast._
 
@@ -33,11 +49,18 @@ Then app will be available on `http://127.0.0.1:8000` as shown:
 
 <img src="docs/screenshot.png">
 
-## Super User
+## Usage
+
+1. Select unit type
+2. Start typing the city name
+3. Click the view button next to the city name
+4. Enjoy!
+
+## Admin Panel
 
 Default Django admin panel is available on `http://127.0.0.1:8000/admin`
 
-You can create new super user with following command:
+You can create new superuser with following command:
 ```bash
 python3 manage.py createsuperuser
 ```

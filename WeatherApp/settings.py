@@ -1,16 +1,15 @@
 """
 Django settings for WeatherApp project.
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = 'django-insecure-%!v1^k@&smkr-e&asx7i&%9x_6w_x96-wrdxi&0fnf1s5wd@=e'
+SECRET_KEY = os.environ.get('SECRET_KEY', "default_value")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -130,3 +129,5 @@ LOGGING = {
         },
     },
 }
+
+OPEN_WEATHER_MAP_API_KEY = os.getenv('OPEN_WEATHER_MAP_API_KEY', 'efa58fb098b2a9f881069b410ca23df3')
