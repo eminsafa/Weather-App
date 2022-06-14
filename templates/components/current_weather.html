@@ -1,0 +1,20 @@
+<table class="table" id="city-list-table">
+    <center>
+        <h2 class="mb-1 mt-4 text-success">{{ cn }}</h2>
+        <h6 class="mb-3 mt-3 text-success">{{ wi.weather.0.main }} ({{ wi.weather.0.description }})</h6>
+    </center>
+    <tbody>
+        <tr><td>Temp</td><td>{{ wi.main.temp }} {{ units.temp.1 }}</td></tr>
+        <tr><td>Feels Like</td><td>{{ wi.main.feels_like|floatformat:1 }} {{ units.temp.1 }}</td></tr>
+        <tr><td>Temp Min/Max</td><td>{{ wi.main.temp_min}} {{ units.temp.1 }} / {{ wi.main.temp_max}} {{ units.temp.1 }}</td></tr>
+        <tr><td>Pressure</td><td>{{ wi.main.pressure }} {{ units.pressure.1 }}</td></tr>
+        <tr><td>Humidity</td><td>{{ wi.main.humidity }} {{ units.humidity.1 }}</td></tr>
+        {% if wi.main.sea_level %}<tr><td>Level Sea/Ground</td><td>{{ wi.main.sea_level }} / {{ wi.main.grnd_level }} {{ units.pressure.1 }}</td></tr>{% endif %}
+        <tr><td>Visibility</td><td>{{ wi.visibility }}</td></tr>
+
+        <tr><td>Wind</td><td>{{ wi.wind.speed }} <sub>{{ units.speed.1 }}</sub></td></tr>
+        {% if wi.rain %}<tr><td>Rain</td><td>{{ wi.rain.new_1h }} mm</td></tr>{% endif %}
+        <tr><td>Clouds</td><td>{{ wi.clouds.all }}</td></tr>
+        <tr><td>Date, Time</td><td>{{ wi.datetime }}</td></tr>
+    </tbody>
+</table>

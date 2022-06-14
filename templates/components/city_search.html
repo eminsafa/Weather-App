@@ -1,0 +1,47 @@
+<div class="form-group">
+    <label for="city-search-input">Search City</label>
+    <input class="form-control" type="text" id="city-search-input" placeholder="Minimum 2 character" onkeyup="updateCityListTable()">
+
+    <label for="unit-input">Unit</label>
+    <select class="form-control" id="unit-input">
+        <option value="standard" {% if unit == 'standard' %}selected{% endif %}>Standard</option>
+        <option value="metric" {% if unit == 'metric' %}selected{% endif %}>Metric</option>
+        <option value="imperial" {% if unit == 'imperial' %}selected{% endif %}>Imperial</option>
+    </select>
+</div>
+
+<table class="table" id="city-list-table">
+    <thead>
+        <tr>
+            <td><b></b></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    async function updateCityListTable(){
+        var hostname = 'http://127.0.0.1:8000/';
+        var searchQuery = document.getElementById('city-search-input').value;
+        if (searchQuery.length > 1){
+            var unit = document.getElementById('unit-input').value;
+            var cityListTableBody = document.querySelector('#city-list-table tbody');
+            while (cityListTableBody.lastElementChild) {
+                cityListTableBody.removeChild(cityListTableBody.lastElementChild);
+            }
+            var response = await fetch(hostname + 'city_search?search_query=' + searchQuery, {method: 'GET'});
+            var result = await response.text();
+            const cities = JSON.parse(result);
+            for (let i = 0; i < cities.length; i++) {
+                var row = cityListTableBody.insertRow(i);
+                var cell_name = row.insertCell(0);
+                var cell_link = row.insertCell(1);
+                cell_name.innerText = cities[i].fields.name;
+                cell_link.innerHTML = '<a href="' + hostname + '?city_id=' + cities[i].fields.wid + '&unit=' + unit + '">View</a>'
+
+            }
+        }
+    }
+</script>

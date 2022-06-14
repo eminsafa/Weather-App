@@ -1,0 +1,26 @@
+{% extends 'pages/base.html' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-2">
+            <h1 style="text-align: center; padding-top: 50px; padding-bottom: 70px;">City Search</h1>
+            {% include 'components/city_search.html' %}
+        </div>
+        <div class="col-4">
+            {% if current_weather %}
+                <center><h1>Weather Info</h1></center>
+                {% include 'components/current_weather.html' with wi=current_weather cn=city_name %}
+            {% elif error %}
+                ERROR: {{ error_text }}
+            {% endif %}
+        </div>
+        <div class="col-6">
+            {% if forecast_weather %}
+                <center><h1>Weather Forecast</h1></center>
+                {% include 'components/forecast_weather.html' with wi=forecast_weather cn=city_name %}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

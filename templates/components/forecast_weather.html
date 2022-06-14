@@ -1,0 +1,25 @@
+{% load humanize %}
+<table class="table table-striped" id="city-list-table">
+    <center>
+        <h2 class="mb-1 mt-4 text-success">{{ cn }}</h2>
+        <h6 class="mb-3 mt-3 text-success">5 Day Forecast</h6>
+    </center>
+    <thead>
+        <tr>
+            <td>Time</td>
+            <td>Temperature {{ units.temp.1 }} <sub>(Max/Min)</sub></td>
+            <td>Precipitation</td>
+            <td>Wind</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fi in wi.list %}
+            <tr>
+                <td>{{ fi.formatted_date }} - {{ fi.datetime.time }}</td>
+                <td><b>{{ fi.main.temp_max|floatformat:2 }}°</b> - {{ fi.main.temp_min|floatformat:2 }}°</td>
+                <td>{% if fi.rain.new_3h %}{{ fi.rain.new_3h|floatformat:2 }}{% else %}0.00{% endif %} mm</td>
+                <td>{{ fi.wind.speed|floatformat:2 }} <sub>{{ units.speed.1 }}</sub> - {{ fi.wind.deg }}° ➹</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
