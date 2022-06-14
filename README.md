@@ -7,6 +7,7 @@ Weather and Forecast Monitoring Web Application
 * [Used Technologies](#used-technologies)
 * [Prerequisites](#prerequisites)
 * [Running](#running)
+* [Usage](#Usage)
 * [Admin Panel](#admin-panel)
 * [Features](#features)
 * [Views and Endpoints](#views--endpoints)
